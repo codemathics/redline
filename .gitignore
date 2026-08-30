@@ -3,5 +3,4 @@ dist-extension
 .tmp-figma
 .DS_Store
 *.log
-src/devtools/agentation.js
-pnpm-lock.yaml
+src/devtools/
