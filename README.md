@@ -7,19 +7,15 @@ hover to preview, click to pin. the panel exposes typography, color, radius,
 border, shadow, opacity, size, gap, padding, and margin as live-editable fields.
 every edit is tracked as a before → after diff; "copy for agent" serializes all
 of them into markdown (selector, element path, text snippet, property diffs)
-ready to paste into a coding agent.
+ready to paste into a coding agent. "copy for figma" puts an svg of the pinned
+element on the clipboard so you can paste it into figma.
 
 ## install
 
-the product path is the chrome web store. there is no listing yet, so a stranger
-cannot install redline the way they install a normal extension. cloning this
-repo does not install anything in chrome.
-
-until a listing exists, the only way someone else runs it is a developer
-install: `pnpm install` && `pnpm run build:ext`, then chrome://extensions →
-developer mode → load unpacked → `dist-extension/`. that is not a public
-install. click the toolbar icon on any page to toggle the inspector (click
-again or press esc to quit).
+download [`dist/redline-0.2.0.zip`](dist/redline-0.2.0.zip), unzip it, then open
+chrome://extensions (or edge://extensions), turn on developer mode, click load
+unpacked, and pick the unzipped folder. click the toolbar icon on any page to
+toggle the inspector (click again or press esc to quit).
 
 ## use it
 
@@ -31,6 +27,7 @@ again or press esc to quit).
 - the **changes tray** (bottom of the panel) lists every diff; hover a row to
   revert it, click the element name to jump back to it.
 - **copy for agent** puts the annotation markdown on your clipboard.
+- **copy for figma** puts an svg of the pinned element on your clipboard.
 
 ## local demo
 
