@@ -6,6 +6,7 @@ import { Panel } from './panel.js'
 import { ChangeStore } from './changes.js'
 import { isInspectable, setEditableText } from './dom.js'
 import { PROP_META } from './styles.js'
+import { copyElementForFigma, elementToSvg } from './figma.js'
 
 const FONT_ID = 'redline-inter'
 const FONT_HREF = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap'
@@ -32,6 +33,8 @@ export function unmount() {
 export function annotation() {
   return instance ? instance.store.toMarkdown() : null
 }
+
+export { elementToSvg }
 
 class Redline {
   constructor() {
@@ -69,6 +72,7 @@ class Redline {
       onToggleTheme: () => this._toggleTheme(),
       isDark: () => this.dark,
       onToast: (msg) => this.toast(msg),
+      onCopyFigma: () => this._copyFigma(),
     })
     this.root = root
 
@@ -255,6 +259,30 @@ class Redline {
     this.pinOverlay.refresh()
     this._restPin()
     this.toast('Undone')
+  }
+
+  async _copyFigma() {
+    const el = this.selected
+    if (!el) {
+      this.toast('select an element first')
+      return false
+    }
+    try {
+      const result = await copyElementForFigma(el)
+      if (result === true) {
+        this.toast('copied for figma')
+        return true
+      }
+      if (result === 'blocked') {
+        this.toast('clipboard blocked by the browser')
+        return false
+      }
+      this.toast('could not copy this element')
+      return false
+    } catch {
+      this.toast('could not copy this element')
+      return false
+    }
   }
 
   // ------------------------------------------------------------ toast
