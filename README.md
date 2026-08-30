@@ -50,5 +50,10 @@ page to toggle the inspector (click again or press Esc to quit).
 - path: `body > main.main > section.hero > div.hero-actions > button.btn`
 - changes:
   - `border-radius`: `12px` → `999px`
-  - `font-size`: `15px` → `17px`
+      - `font-size`: `15px` → `17px`
 ```
+
+## License
+
+MIT. see `LICENSE`.
+
