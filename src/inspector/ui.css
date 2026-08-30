@@ -69,6 +69,9 @@
   --rl-radius-md: 9px;
   --rl-radius-sm: 6px;
   --rl-pad: 12px;
+  --rl-panel-width: 312px;
+  --rl-btn-h: 26px;
+  --rl-icon: 12px;
 
   /* motion */
   --rl-ease: cubic-bezier(0.25, 0.9, 0.3, 1);
@@ -127,6 +130,7 @@
   pointer-events: none;
   z-index: 2147483644;
   opacity: 0;
+  visibility: hidden;
   will-change: transform, width, height;
   transition:
     transform 150ms var(--rl-spring),
@@ -134,7 +138,7 @@
     height 150ms var(--rl-spring),
     opacity var(--rl-fast) linear;
 }
-.rl-overlay.rl-on { opacity: 1; }
+.rl-overlay.rl-on { opacity: 1; visibility: visible; }
 .rl-overlay .rl-box {
   position: absolute; inset: 0;
   border-radius: 2px;
@@ -210,7 +214,7 @@
   position: fixed;
   top: 14px;
   right: 14px;
-  width: 268px;
+  width: var(--rl-panel-width);
   max-height: calc(100vh - 28px);
   display: flex;
   flex-direction: column;
@@ -267,6 +271,29 @@
 .rl-brand-mark { fill: var(--rl-red); }
 .rl-brand-word { fill: var(--rl-ink); }
 .rl-head-spacer { flex: 1; }
+.rl-head-pair {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.rl-head-text {
+  all: unset;
+  height: 24px;
+  padding: 0 8px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--rl-radius-sm);
+  color: var(--rl-ink-2);
+  font-size: var(--rl-text-sm);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--rl-fast) linear, color var(--rl-fast) linear, transform var(--rl-fast) var(--rl-ease);
+}
+.rl-head-text:hover { background: var(--rl-field-hover); color: var(--rl-ink); }
+.rl-head-text:active { transform: scale(0.92); }
+.rl-head-text:disabled { opacity: 0.4; cursor: default; transform: none; }
+.rl-head-text:focus-visible { box-shadow: 0 0 0 2px var(--rl-surface-solid), 0 0 0 4px var(--rl-red-mid); }
 .rl-iconbtn {
   all: unset;
   width: 24px; height: 24px;
@@ -279,8 +306,14 @@
 }
 .rl-iconbtn:hover { background: var(--rl-field-hover); color: var(--rl-ink); }
 .rl-iconbtn:active { transform: scale(0.92); }
+.rl-iconbtn:disabled { opacity: 0.4; cursor: default; transform: none; }
 .rl-iconbtn:focus-visible { box-shadow: 0 0 0 2px var(--rl-surface-solid), 0 0 0 4px var(--rl-red-mid); }
 .rl-iconbtn svg { width: 13px; height: 13px; display: block; }
+.rl-iconbtn.rl-on {
+  background: var(--rl-ink);
+  color: var(--rl-surface-solid);
+}
+.rl-iconbtn.rl-on:hover { background: var(--rl-ink); color: var(--rl-surface-solid); }
 
 /* body */
 .rl-body {
@@ -824,23 +857,41 @@ textarea.rl-textarea {
 /* footer actions */
 .rl-actions {
   display: flex;
+  align-items: center;
   gap: 6px;
   padding: 0 var(--rl-pad) var(--rl-pad);
 }
 .rl-btn {
   all: unset;
-  flex: 1;
+  box-sizing: border-box;
+  flex: 1 1 0;
+  min-width: 0;
+  width: 0;
+  height: var(--rl-btn-h);
+  min-height: var(--rl-btn-h);
+  max-height: var(--rl-btn-h);
+  overflow: hidden;
   text-align: center;
   font-size: var(--rl-text-sm);
   font-weight: 600;
-  padding: 7px 0;
+  padding: 0 8px;
   border-radius: var(--rl-radius-md);
   cursor: pointer;
   user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  line-height: 1;
   transition: transform var(--rl-fast) var(--rl-ease), background var(--rl-fast) linear, box-shadow var(--rl-fast) linear, color var(--rl-fast) linear;
 }
 .rl-btn:active { transform: scale(0.97); }
 .rl-btn:focus-visible { box-shadow: 0 0 0 2px var(--rl-surface-solid), 0 0 0 4px var(--rl-red-mid); }
+.rl-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .rl-btn-ghost {
   color: var(--rl-ink-2);
   background: var(--rl-field);
@@ -850,13 +901,6 @@ textarea.rl-textarea {
 }
 .rl-btn-ghost:hover { background: var(--rl-field-hover); color: var(--rl-ink); }
 .rl-btn-ghost:disabled { opacity: 0.4; cursor: default; transform: none; }
-.rl-btn-eye { padding-left: 10px; padding-right: 10px; }
-.rl-btn-eye svg { width: 14px; height: 14px; vertical-align: -3px; }
-.rl-btn-eye.rl-on {
-  background: var(--rl-ink);
-  color: var(--rl-surface-solid);
-}
-.rl-btn-eye.rl-on:hover { background: var(--rl-ink); color: var(--rl-surface-solid); }
 .rl-btn-primary {
   color: oklch(0.99 0.005 27);
   background: linear-gradient(180deg, oklch(0.64 0.213 27), var(--rl-red-deep));
@@ -864,17 +908,69 @@ textarea.rl-textarea {
     inset 0 1px 0 oklch(1 0 0 / 0.18),
     0 0 0 1px var(--rl-red-deep),
     0 1px 3px oklch(0.6 0.213 27 / 0.35);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
 }
 .rl-btn-primary:hover { background: linear-gradient(180deg, oklch(0.67 0.213 27), var(--rl-red-deep)); }
-.rl-btn-primary:disabled { opacity: 0.45; cursor: default; transform: none; }
-.rl-btn-primary svg { width: 12px; height: 12px; }
-.rl-btn-primary.rl-copied {
+.rl-btn-primary:disabled,
+.rl-btn-primary:disabled:hover {
+  color: var(--rl-ink-2);
+  background: var(--rl-field);
+  box-shadow: none;
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+.rl-btn > svg {
+  width: var(--rl-icon);
+  height: var(--rl-icon);
+  max-width: var(--rl-icon);
+  max-height: var(--rl-icon);
+  display: block;
+  flex: none;
+}
+.rl-btn-secondary {
+  color: var(--rl-ink);
+  background: var(--rl-field);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.06),
+    inset 0 0 0 1px var(--rl-swatch-ring);
+}
+.rl-btn-secondary:hover { background: var(--rl-field-hover); }
+.rl-btn-secondary:disabled,
+.rl-btn-secondary:disabled:hover {
+  color: var(--rl-ink-2);
+  background: var(--rl-field);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.06),
+    inset 0 0 0 1px var(--rl-swatch-ring);
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+}
+.rl-btn.rl-busy {
+  pointer-events: none;
+  cursor: default;
+}
+.rl-btn-primary.rl-copied,
+.rl-btn-primary.rl-copied:disabled,
+.rl-btn-secondary.rl-copied,
+.rl-btn-secondary.rl-copied:disabled {
+  color: oklch(0.99 0.005 150);
   background: linear-gradient(180deg, oklch(0.66 0.17 150), oklch(0.56 0.16 150));
-  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.18), 0 0 0 1px oklch(0.52 0.15 150), 0 1px 3px oklch(0.62 0.17 150 / 0.35);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / 0.22), 0 0 0 1px oklch(0.52 0.15 150), 0 1px 3px var(--rl-green);
+  opacity: 1;
+}
+.rl-figma-mark {
+  width: 12px;
+  height: 12px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  line-height: 0;
+}
+.rl-figma-mark svg {
+  width: 8px;
+  height: 12px;
+  display: block;
 }
 
 /* toast: drops in from the top; wrapper owns centering so the spring only
