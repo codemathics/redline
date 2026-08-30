@@ -11,15 +11,16 @@ ready to paste into a coding agent.
 
 ## install
 
-the product path is the chrome web store. there is no listing yet, so a stranger
-cannot install redline the way they install a normal extension. cloning this
-repo does not install anything in chrome.
+install redline from the [chrome web store](https://chromewebstore.google.com/category/extensions)
+like any other extension. the listing is submitted; the store url goes here
+once review finishes.
 
-until a listing exists, the only way someone else runs it is a developer
-install: `pnpm install` && `pnpm run build:ext`, then chrome://extensions →
-developer mode → load unpacked → `dist-extension/`. that is not a public
-install. click the toolbar icon on any page to toggle the inspector (click
-again or press esc to quit).
+click the toolbar icon on any page to toggle the inspector (click again or
+press esc to quit).
+
+if you are working on the extension itself, `pnpm install` && `pnpm run pack:ext`
+builds `dist-extension/` and a store zip. chrome://extensions → developer mode
+→ load unpacked → `dist-extension/`.
 
 ## use it
 
