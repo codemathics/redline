@@ -1,12 +1,13 @@
 {
   "name": "redline",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:ext": "vite build --config vite.extension.config.js && node scripts/pack-extension.js"
+    "build:ext": "vite build --config vite.extension.config.js && node scripts/pack-extension.js",
+    "pack:ext": "pnpm run build:ext && node scripts/zip-extension.js"
   },
   "devDependencies": {
     "vite": "^6.0.0"

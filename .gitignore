@@ -4,3 +4,4 @@ dist-extension
 .DS_Store
 *.log
 src/devtools/
+store/redline.zip
