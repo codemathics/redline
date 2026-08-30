@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Redline",
+  "version": "0.1.0",
+  "description": "Inspect any element, live-edit its styles, and copy agent-ready design annotations.",
+  "action": {
+    "default_title": "Toggle Redline"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["activeTab", "scripting"]
+}

@@ -1,0 +1,135 @@
+/* Demo page (the page under inspection). Deliberately its own little system. */
+
+:root {
+  --bg: oklch(0.98 0.004 90);
+  --ink: oklch(0.22 0.015 75);
+  --ink-2: oklch(0.52 0.012 75);
+  --line: oklch(0.22 0.015 75 / 0.09);
+  --accent: oklch(0.55 0.16 155);
+  --card: oklch(1 0 0);
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  padding: 18px 40px;
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: oklch(0.98 0.004 90 / 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+.nav-brand { font-weight: 700; font-size: 17px; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+.nav-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.nav-links { display: flex; gap: 22px; flex: 1; }
+.nav-link { color: var(--ink-2); text-decoration: none; font-size: 14px; font-weight: 500; }
+.nav-link:hover { color: var(--ink); }
+
+.main { max-width: 960px; margin: 0 auto; padding: 0 32px; }
+
+.hero { text-align: center; padding: 96px 0 72px; }
+.hero-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  background: oklch(0.55 0.16 155 / 0.09);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+}
+.hero-title {
+  font-family: "Geist", sans-serif;
+  font-size: 56px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.hero-sub {
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto 32px;
+}
+.hero-actions { display: flex; gap: 12px; justify-content: center; }
+.hero-actions .btn-primary {
+  font-size: 16px;
+  letter-spacing: 1px;
+  width: 216px;
+  height: 76px;
+  padding: 26px 43px 12px 22px;
+  margin-top: 52px;
+}
+
+.btn {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 0;
+  cursor: pointer;
+  transition: transform 120ms ease, background 120ms ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-sm { font-size: 13px; padding: 8px 16px; border-radius: 9px; }
+.btn-primary { background: var(--accent); color: white; }
+.btn-primary:hover { background: oklch(0.5 0.16 155); }
+.btn-ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.btn-ghost:hover { background: oklch(0.22 0.015 75 / 0.04); }
+.btn-dark { background: var(--ink); color: var(--bg); }
+
+.features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 72px; }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 26px 24px;
+}
+.card-icon {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.card-icon-mint { background: oklch(0.93 0.05 160); color: oklch(0.45 0.12 160); }
+.card-icon-gold { background: oklch(0.94 0.06 85); color: oklch(0.55 0.12 75); }
+.card-icon-sky { background: oklch(0.93 0.04 240); color: oklch(0.5 0.12 250); }
+.card-title { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+.card-body { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+
+.cta {
+  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 24px;
+  padding: 56px 32px;
+  margin-bottom: 80px;
+}
+.cta-title { font-size: 28px; font-weight: 700; letter-spacing: -0.025em; margin-bottom: 8px; }
+.cta-sub { color: var(--ink-2); margin-bottom: 24px; }
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 40px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 13px;
+}
+.footer-links a { color: inherit; text-decoration: none; }
