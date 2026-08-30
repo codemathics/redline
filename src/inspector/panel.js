@@ -91,7 +91,7 @@ export class Panel {
     head.className = 'rl-head'
     const dark = this.hooks.isDark?.() ?? false
     head.innerHTML = `
-      <span class="rl-brand" aria-label="Redline">${ICONS.lockup}</span>
+      <span class="rl-brand" role="img" aria-label="Redline">${ICONS.lockup}</span>
       <span class="rl-head-spacer"></span>
       <button class="rl-iconbtn" data-act="theme" title="Switch to ${dark ? 'light' : 'dark'} editor" aria-label="Toggle editor theme">${dark ? ICONS.sun : ICONS.moon}</button>
       <button class="rl-iconbtn" data-act="close" title="Quit (Esc)" aria-label="Quit Redline">${ICONS.close}</button>`
