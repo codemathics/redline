@@ -1,46 +1,47 @@
-# Redline
+# redline
 
-Inspect any element on any page, live-edit its styles, and copy an agent-ready
+inspect any element on any page, live-edit its styles, and copy an agent-ready
 annotation of everything you changed.
 
-Hover to preview, click to pin. The panel exposes typography, color, radius,
+hover to preview, click to pin. the panel exposes typography, color, radius,
 border, shadow, opacity, size, gap, padding, and margin as live-editable fields.
-Every edit is tracked as a before → after diff; "Copy for agent" serializes all
+every edit is tracked as a before → after diff; "copy for agent" serializes all
 of them into markdown (selector, element path, text snippet, property diffs)
-ready to paste into Claude Code or any coding agent.
+ready to paste into a coding agent.
 
-## Use it
+## install
 
-- **Hover** previews an element, **click** pins it.
-- **Drag a field label** (or the padding/margin numbers) to scrub values; hold
-  **shift** for 10×. Arrow keys nudge a focused field.
+the product path is the chrome web store. there is no listing yet, so a stranger
+cannot install redline the way they install a normal extension. cloning this
+repo does not install anything in chrome.
+
+until a listing exists, the only way someone else runs it is a developer
+install: `pnpm install` && `pnpm run build:ext`, then chrome://extensions →
+developer mode → load unpacked → `dist-extension/`. that is not a public
+install. click the toolbar icon on any page to toggle the inspector (click
+again or press esc to quit).
+
+## use it
+
+- **hover** previews an element, **click** pins it.
+- **drag a field label** (or the padding/margin numbers) to scrub values; hold
+  **shift** for 10×. arrow keys nudge a focused field.
 - **↑ / ↓ / ← / →** walk the DOM (parent / child / siblings) while pinned.
-- **Cmd+Z** undoes the last edit. **Esc** unpins, then quits.
-- The **changes tray** (bottom of the panel) lists every diff; hover a row to
+- **cmd+z** undoes the last edit. **esc** unpins, then quits.
+- the **changes tray** (bottom of the panel) lists every diff; hover a row to
   revert it, click the element name to jump back to it.
-- **Copy for agent** puts the annotation markdown on your clipboard.
+- **copy for agent** puts the annotation markdown on your clipboard.
 
-## Dev harness
+## local demo
 
-```bash
-pnpm install
-pnpm dev          # demo page + inspector at http://localhost:5210
-```
+`pnpm install` && `pnpm dev` is the local demo harness (demo page + inspector
+at http://localhost:5210). it is how you try the inspector on a page under
+test. it is not how you install the extension.
 
-The harness auto-mounts the inspector (`window.redline.toggle()` or Cmd+. to
+the harness auto-mounts the inspector (`window.redline.toggle()` or cmd+. to
 re-toggle).
 
-## Build the Chrome extension
-
-```bash
-pnpm run build:ext
-```
-
-Then open `chrome://extensions`, enable Developer mode, click **Load unpacked**,
-and pick the `dist-extension/` folder. Click the Redline toolbar icon on any
-page to toggle the inspector (click again or press Esc to quit).
-
-## Annotation format
+## annotation format
 
 ```markdown
 ## Design annotations: example.com/pricing
@@ -53,7 +54,6 @@ page to toggle the inspector (click again or press Esc to quit).
       - `font-size`: `15px` → `17px`
 ```
 
-## License
+## license
 
 MIT. see `LICENSE`.
-
